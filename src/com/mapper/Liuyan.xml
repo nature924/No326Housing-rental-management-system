@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.LiuyanMapper">
+		<resultMap type="Liuyan" id="liuyanResult">
+			<id property="id" column="id"/>
+			<result property="title" column="title"/>
+			<result property="neirong" column="neirong"/>
+			<result property="huifu" column="huifu"/>
+			<result property="uname" column="uname"/>
+			<result property="addtime" column="addtime"/>
+		</resultMap>
+		<insert id="insert" parameterType="Liuyan">
+			insert into liuyan
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title != null">title,</if>
+			<if test="neirong != null">neirong,</if>
+			<if test="huifu != null">huifu,</if>
+			<if test="uname != null">uname,</if>
+			<if test="addtime != null">addtime,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="title != null">#{title},</if>
+			<if test="neirong != null">#{neirong},</if>
+			<if test="huifu != null">#{huifu},</if>
+			<if test="uname != null">#{uname},</if>
+			<if test="addtime != null">#{addtime},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Liuyan">
+			update liuyan
+			<trim prefix="set" suffixOverrides=",">
+			<if test="title != null">title=#{title},</if>
+			<if test="neirong != null">neirong=#{neirong},</if>
+			<if test="huifu != null">huifu=#{huifu},</if>
+			<if test="uname != null">uname=#{uname},</if>
+			<if test="addtime != null">addtime=#{addtime},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Liuyan">
+			delete from liuyan where id= #{id}
+		</delete>
+		<select id="list" resultType="Liuyan" resultMap="liuyanResult">
+			select * from  liuyan where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Liuyan" resultMap="liuyanResult">
+			select * from  liuyan where 1=1 ${where} order by id desc
+			</select>
+		<select id="get" parameterType="_int" resultType="Liuyan">
+			select * from  Liuyan  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from liuyan    
+	    </select>
+	</mapper>

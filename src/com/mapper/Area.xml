@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.AreaMapper">
+		<resultMap type="Area" id="areaResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+		</resultMap>
+		<insert id="insert" parameterType="Area">
+			insert into area (name) values (#{name})
+		</insert>
+		<update id="update" parameterType="Area">
+			update area set name=#{name} where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Area">
+			delete from area where id= #{id}
+		</delete>
+		<select id="list" resultType="Area" resultMap="areaResult">
+			select * from  area where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Area" resultMap="areaResult">
+			select * from  area where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Area">
+			select * from  Area  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from area    
+	    </select>
+<update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

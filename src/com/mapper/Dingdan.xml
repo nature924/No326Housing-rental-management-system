@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.DingdanMapper">
+		<resultMap type="Dingdan" id="dingdanResult">
+			<id property="id" column="id"/>
+			<result property="fang" column="fang"/>
+			<result property="orderid" column="orderid"/>
+			<result property="jiage" column="jiage"/>
+			<result property="yajin" column="yajin"/>
+			<result property="sdate" column="sdate"/>
+			<result property="tel" column="tel"/>
+			<result property="beizhu" column="beizhu"/>
+			<result property="uname" column="uname"/>
+			<result property="sname" column="sname"/>
+			<result property="zt" column="zt"/>
+			<association property="fang" column="fangfk" select="com.mapper.FangMapper.get">
+			</association>
+		</resultMap>
+		<insert id="insert" parameterType="Dingdan">
+			insert into dingdan
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fang != null">fang,</if>
+			<if test="orderid != null">orderid,</if>
+			<if test="jiage != null">jiage,</if>
+			<if test="yajin != null">yajin,</if>
+			<if test="sdate != null">sdate,</if>
+			<if test="tel != null">tel,</if>
+			<if test="beizhu != null">beizhu,</if>
+			<if test="uname != null">uname,</if>
+			<if test="sname != null">sname,</if>
+			<if test="zt != null">zt,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fang != null">#{fang},</if>
+			<if test="orderid != null">#{orderid},</if>
+			<if test="jiage != null">#{jiage},</if>
+			<if test="yajin != null">#{yajin},</if>
+			<if test="sdate != null">#{sdate},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="beizhu != null">#{beizhu},</if>
+			<if test="uname != null">#{uname},</if>
+			<if test="sname != null">#{sname},</if>
+			<if test="zt != null">#{zt},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Dingdan">
+			update dingdan
+			<trim prefix="set" suffixOverrides=",">
+			<if test="fang != null">fang=#{fang},</if>
+			<if test="orderid != null">orderid=#{orderid},</if>
+			<if test="jiage != null">jiage=#{jiage},</if>
+			<if test="yajin != null">yajin=#{yajin},</if>
+			<if test="sdate != null">sdate=#{sdate},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="beizhu != null">beizhu=#{beizhu},</if>
+			<if test="uname != null">uname=#{uname},</if>
+			<if test="sname != null">sname=#{sname},</if>
+			<if test="zt != null">zt=#{zt},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Dingdan">
+			delete from dingdan where id= #{id}
+		</delete>
+		<select id="list" resultType="Dingdan" resultMap="dingdanResult">
+			select * from  dingdan where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Dingdan" resultMap="dingdanResult">
+			select * from  dingdan where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Dingdan">
+			select * from  Dingdan  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from dingdan ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Dingdan">
+			select * from  dingdan ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

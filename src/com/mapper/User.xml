@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.UserMapper">
+		<resultMap type="User" id="userResult">
+			<id property="id" column="id"/>
+			<result property="username" column="username"/>
+			<result property="pwd" column="pwd"/>
+			<result property="sex" column="sex"/>
+			<result property="name" column="name"/>
+			<result property="tel" column="tel"/>
+			<result property="zt" column="zt"/>
+		</resultMap>
+		<insert id="insert" parameterType="User">
+			insert into user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">username,</if>
+			<if test="pwd != null">pwd,</if>
+			<if test="sex != null">sex,</if>
+			<if test="name != null">name,</if>
+			<if test="tel != null">tel,</if>
+			<if test="zt != null">zt,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">#{username},</if>
+			<if test="pwd != null">#{pwd},</if>
+			<if test="sex != null">#{sex},</if>
+			<if test="name != null">#{name},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="zt != null">#{zt},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="User">
+			update user
+			<trim prefix="set" suffixOverrides=",">
+			<if test="username != null">username=#{username},</if>
+			<if test="pwd != null">pwd=#{pwd},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="name != null">name=#{name},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="zt != null">zt=#{zt},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="User">
+			delete from user where id= #{id}
+		</delete>
+		<select id="list" resultType="User" resultMap="userResult">
+			select * from  user where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="User" resultMap="userResult">
+			select * from  user where 1=1 ${where} order by id desc
+			</select>
+		<select id="get" parameterType="_int" resultType="User">
+			select * from  User  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from user    
+	    </select>
+	</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.KanfangMapper">
+		<resultMap type="Kanfang" id="kanfangResult">
+			<id property="id" column="id"/>
+			<result property="zfang" column="zfang"/>
+			<result property="sdate" column="sdate"/>
+			<result property="tel" column="tel"/>
+			<result property="beizhu" column="beizhu"/>
+			<result property="sname" column="sname"/>
+			<result property="uname" column="uname"/>
+			<result property="zt" column="zt"/>
+			<association property="zfang" column="zfangfk" select="com.mapper.ZfangMapper.get">
+			</association>
+		</resultMap>
+		<insert id="insert" parameterType="Kanfang">
+			insert into kanfang
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="zfang != null">zfang,</if>
+			<if test="sdate != null">sdate,</if>
+			<if test="tel != null">tel,</if>
+			<if test="beizhu != null">beizhu,</if>
+			<if test="sname != null">sname,</if>
+			<if test="uname != null">uname,</if>
+			<if test="zt != null">zt,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="zfang != null">#{zfang},</if>
+			<if test="sdate != null">#{sdate},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="beizhu != null">#{beizhu},</if>
+			<if test="sname != null">#{sname},</if>
+			<if test="uname != null">#{uname},</if>
+			<if test="zt != null">#{zt},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Kanfang">
+			update kanfang
+			<trim prefix="set" suffixOverrides=",">
+			<if test="zfang != null">zfang=#{zfang},</if>
+			<if test="sdate != null">sdate=#{sdate},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="beizhu != null">beizhu=#{beizhu},</if>
+			<if test="sname != null">sname=#{sname},</if>
+			<if test="uname != null">uname=#{uname},</if>
+			<if test="zt != null">zt=#{zt},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Kanfang">
+			delete from kanfang where id= #{id}
+		</delete>
+		<select id="list" resultType="Kanfang" resultMap="kanfangResult">
+			select * from  kanfang where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Kanfang" resultMap="kanfangResult">
+			select * from  kanfang where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Kanfang">
+			select * from  Kanfang  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from kanfang ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Kanfang">
+			select * from  kanfang ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

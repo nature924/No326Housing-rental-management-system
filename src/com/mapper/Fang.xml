@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.FangMapper">
+		<resultMap type="Fang" id="fangResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="pic" column="pic"/>
+			<result property="area" column="area"/>
+			<result property="xiaoqu" column="xiaoqu"/>
+			<result property="chanquan" column="chanquan"/>
+			<result property="niandai" column="niandai"/>
+			<result property="chaoxiang" column="chaoxiang"/>
+			<result property="zhuangxiu" column="zhuangxiu"/>
+			<result property="mianji" column="mianji"/>
+			<result property="jiage" column="jiage"/>
+			<result property="dizhi" column="dizhi"/>
+			<result property="lianxiren" column="lianxiren"/>
+			<result property="tel" column="tel"/>
+			<result property="gongjiao" column="gongjiao"/>
+			<result property="uname" column="uname"/>
+			<result property="jieshao" column="jieshao"/>
+			<result property="addtime" column="addtime"/>
+			<result property="zt" column="zt"/>
+		</resultMap>
+		<insert id="insert" parameterType="Fang">
+			insert into fang
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">name,</if>
+			<if test="pic != null">pic,</if>
+			<if test="area != null">area,</if>
+			<if test="xiaoqu != null">xiaoqu,</if>
+			<if test="chanquan != null">chanquan,</if>
+			<if test="niandai != null">niandai,</if>
+			<if test="chaoxiang != null">chaoxiang,</if>
+			<if test="zhuangxiu != null">zhuangxiu,</if>
+			<if test="mianji != null">mianji,</if>
+			<if test="jiage != null">jiage,</if>
+			<if test="dizhi != null">dizhi,</if>
+			<if test="lianxiren != null">lianxiren,</if>
+			<if test="tel != null">tel,</if>
+			<if test="gongjiao != null">gongjiao,</if>
+			<if test="uname != null">uname,</if>
+			<if test="jieshao != null">jieshao,</if>
+			<if test="addtime != null">addtime,</if>
+			<if test="zt != null">zt,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">#{name},</if>
+			<if test="pic != null">#{pic},</if>
+			<if test="area != null">#{area},</if>
+			<if test="xiaoqu != null">#{xiaoqu},</if>
+			<if test="chanquan != null">#{chanquan},</if>
+			<if test="niandai != null">#{niandai},</if>
+			<if test="chaoxiang != null">#{chaoxiang},</if>
+			<if test="zhuangxiu != null">#{zhuangxiu},</if>
+			<if test="mianji != null">#{mianji},</if>
+			<if test="jiage != null">#{jiage},</if>
+			<if test="dizhi != null">#{dizhi},</if>
+			<if test="lianxiren != null">#{lianxiren},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="gongjiao != null">#{gongjiao},</if>
+			<if test="uname != null">#{uname},</if>
+			<if test="jieshao != null">#{jieshao},</if>
+			<if test="addtime != null">#{addtime},</if>
+			<if test="zt != null">#{zt},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Fang">
+			update fang
+			<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if>
+			<if test="pic != null">pic=#{pic},</if>
+			<if test="area != null">area=#{area},</if>
+			<if test="xiaoqu != null">xiaoqu=#{xiaoqu},</if>
+			<if test="chanquan != null">chanquan=#{chanquan},</if>
+			<if test="niandai != null">niandai=#{niandai},</if>
+			<if test="chaoxiang != null">chaoxiang=#{chaoxiang},</if>
+			<if test="zhuangxiu != null">zhuangxiu=#{zhuangxiu},</if>
+			<if test="mianji != null">mianji=#{mianji},</if>
+			<if test="jiage != null">jiage=#{jiage},</if>
+			<if test="dizhi != null">dizhi=#{dizhi},</if>
+			<if test="lianxiren != null">lianxiren=#{lianxiren},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="gongjiao != null">gongjiao=#{gongjiao},</if>
+			<if test="uname != null">uname=#{uname},</if>
+			<if test="jieshao != null">jieshao=#{jieshao},</if>
+			<if test="addtime != null">addtime=#{addtime},</if>
+			<if test="zt != null">zt=#{zt},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Fang">
+			delete from fang where id= #{id}
+		</delete>
+		<select id="list" resultType="Fang" resultMap="fangResult">
+			select * from  fang where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Fang" resultMap="fangResult">
+			select * from  fang where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Fang">
+			select * from  Fang  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from fang ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Fang">
+			select * from  fang ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

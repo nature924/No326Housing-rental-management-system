@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.NoticeMapper">
+		<resultMap type="Notice" id="noticeResult">
+			<id property="id" column="id"/>
+			<result property="title" column="title"/>
+			<result property="pic" column="pic"/>
+			<result property="neirong" column="neirong"/>
+			<result property="addtime" column="addtime"/>
+		</resultMap>
+		<insert id="insert" parameterType="Notice">
+			insert into notice
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title != null">title,</if>
+			<if test="pic != null">pic,</if>
+			<if test="neirong != null">neirong,</if>
+			<if test="addtime != null">addtime,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="title != null">#{title},</if>
+			<if test="pic != null">#{pic},</if>
+			<if test="neirong != null">#{neirong},</if>
+			<if test="addtime != null">#{addtime},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Notice">
+			update notice
+			<trim prefix="set" suffixOverrides=",">
+			<if test="title != null">title=#{title},</if>
+			<if test="pic != null">pic=#{pic},</if>
+			<if test="neirong != null">neirong=#{neirong},</if>
+			<if test="addtime != null">addtime=#{addtime},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Notice">
+			delete from notice where id= #{id}
+		</delete>
+		<select id="list" resultType="Notice" resultMap="noticeResult">
+			select * from  notice where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Notice" resultMap="noticeResult">
+			select * from  notice where 1=1 ${where} order by id desc
+			</select>
+		<select id="get" parameterType="_int" resultType="Notice">
+			select * from  Notice  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from notice    
+	    </select>
+	</mapper>

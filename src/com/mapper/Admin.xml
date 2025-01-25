@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.AdminMapper">
+		<resultMap type="Admin" id="adminResult">
+			<id property="id" column="id"/>
+			<result property="adminname" column="adminname"/>
+			<result property="pwd" column="pwd"/>
+		</resultMap>
+		<insert id="insert" parameterType="Admin">
+			insert into admin (adminname,pwd) values (#{adminname},#{pwd})
+		</insert>
+		<update id="update" parameterType="Admin">
+			update admin set adminname=#{adminname},pwd=#{pwd} where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Admin">
+			delete from admin where id= #{id}
+		</delete>
+		<select id="list" resultType="Admin" resultMap="adminResult">
+			select * from  admin where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Admin" resultMap="adminResult">
+			select * from  admin where 1=1 ${where} order by id desc
+			</select>
+		<select id="get" parameterType="_int" resultType="Admin">
+			select * from  Admin  where id= #{id}
+		</select>
+			<select id="total" resultType="int">
+	        select count(*) from admin    
+	    </select>
+	</mapper>
